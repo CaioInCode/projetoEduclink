@@ -1,0 +1,586 @@
+/* =========================================================
+   RESET BÁSICO
+========================================================= */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Compensa navbar fixa */
+body {
+    padding-top: 60px;
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+.navbar-edulink {
+    background-color: #1d3557;
+    padding: 12px 0;
+    transition: background-color .3s ease, padding .3s ease;
+}
+
+.navbar-edulink.scrolled {
+    padding: 6px 0;
+    background-color: #162b47 !important;
+}
+
+.navbar-edulink .navbar-brand {
+    color: #f1faee;
+    font-size: 1.35rem;
+    letter-spacing: 0.5px;
+}
+
+.navbar-edulink .navbar-brand:hover {
+    color: #a8dadc;
+}
+
+.navbar-edulink .nav-link {
+    color: #f1faee !important;
+    font-weight: 500;
+    margin: 0 10px;
+    position: relative;
+    transition: .3s;
+}
+
+.navbar-edulink .nav-link:hover {
+    color: #a8dadc !important;
+}
+
+/* Linha de destaque */
+.navbar-edulink .nav-link::after {
+    content: "";
+    width: 0%;
+    height: 2px;
+    background-color: #a8dadc;
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    transition: width .3s;
+}
+
+.navbar-edulink .nav-link:hover::after {
+    width: 100%;
+}
+
+/* Botão Entrar */
+.btn-login-edulink {
+    background-color: #f1faee;
+    color: #1d3557;
+    font-weight: 600;
+    border-radius: 25px;
+    transition: .3s;
+}
+
+.btn-login-edulink:hover {
+    background-color: #a8dadc;
+    color: #1d3557;
+}
+.modal-footer p{
+    color: black;
+}
+/* Toggler */
+.navbar-toggler {
+    border: none !important;
+}
+
+.navbar-toggler-icon {
+    filter: brightness(0) invert(1);
+}
+
+.nav-link.active {
+    font-weight: bold;
+    border-bottom: 2px solid #fff;
+}
+
+/* =========================================================
+   HERO SECTION
+========================================================= */
+.hero {
+    position: relative;
+    background-image: url('../image/educ.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+/* Responsividade HERO */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
+/* =========================================================
+   SEÇÃO DE FUNCIONALIDADES — VISUAL TECNOLÓGICO
+========================================================= */
+#features {
+    background: url("https://assets.codepen.io/1462889/circuit-board.svg");
+    background-size: cover;
+    background-position: center;
+    background: linear-gradient(135deg, #98b5df 0%, #102e56 100%);
+    color: #ffffff;
+    padding: 60px 20px;
+}
+
+/* Card futurista */
+#features .card {
+    background: rgba(10, 25, 47, 0.80);
+    backdrop-filter: blur(6px);
+    border-radius: 15px;
+    border: 1px solid rgba(168, 218, 220, 0.25);
+    padding: 20px;
+    transition: 0.3s;
+}
+
+#features .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+/* Título dos cards (Planos Inteligentes / Reutilização de Práticas / Relatórios Avançados) */
+#features .card-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #a8dadc;
+    text-shadow: 0 0 8px rgba(168, 218, 220, 0.4);
+}
+
+/* Textos dos cards */
+#features .card-text {
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+/* Ícones circulares */
+.icon-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #a8dadc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.icon-circle i {
+    font-size: 2rem;
+    color: #1d3557;
+}
+
+/* =========================================================
+   SOBRE
+========================================================= */
+#about {
+    background-color: #a8dadc;
+    color: #1d3557;
+    padding: 60px 20px;
+}
+
+#about h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* =========================================================
+   TESTEMUNHOS
+========================================================= */
+#testimonials {
+    padding: 60px 20px;
+    color: #1d4a57;
+}
+
+#testimonials .card {
+    border-radius: 15px;
+    background-color: #f1faee;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#testimonials .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+#testimonials h6 {
+    margin-top: 10px;
+    font-weight: bold;
+}
+/* Cards brancos dentro da seção tecnológica */
+#features .card,
+.feature-card {
+    background-color: #ffffff !important;
+    border-radius: 15px;
+    border: 1px solid #e5e5e5;
+    transition: .3s ease;
+    color: #1d3557;
+    padding: 20px;
+}
+
+#features .card:hover,
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+/* Títulos */
+#features .card-title,
+.feature-card h5 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #1d3557;
+}
+
+/* Textos dentro dos cards */
+#features .card-text,
+.feature-card p {
+    color: #333 !important;
+}
+
+/* Ícone circular */
+.icon-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #1d3557;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.icon-circle i {
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+
+
+/* =========================================================
+   CALL TO ACTION
+========================================================= */
+section.py-5.text-center {
+    background-color: #457b9d;
+    color: white;
+    padding: 60px 20px;
+}
+
+section.py-5.text-center .btn {
+    font-weight: bold;
+}
+
+/* =========================================================
+   SOBRE — VISUAL TECNOLÓGICO
+========================================================= */
+#about {
+    background: linear-gradient(135deg, #102e56 0%, #98b5df 100%);
+    color: #e9f5ff;
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de grade tecnológica ao fundo */
+#about::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://assets.codepen.io/1462889/circuit-board.svg");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.08;
+    pointer-events: none;
+}
+
+/* Container acima do efeito */
+#about .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Título */
+#about h2 {
+    font-weight: bold;
+    font-size: 2.4rem;
+    text-align: center;
+    color: #a8dadc;
+    margin-bottom: 25px;
+    text-shadow: 0 0 8px rgba(168,218,220,0.4);
+}
+
+/* Texto */
+#about p {
+    font-size: 1.35rem;
+    line-height: 1.9;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    color: #e9f5ff;
+}
+
+/* Botão dentro da seção */
+#about .btn {
+    margin-top: 25px;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: #a8dadc;
+    color: #0a1a2f;
+    border-radius: 30px;
+    transition: .3s ease;
+}
+
+#about .btn:hover {
+    background-color: #f1faee;
+    color: #2f0a0a;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255,255,255,0.15);
+}
+
+
+/* =========================================================
+   EFEITO FADE-IN
+========================================================= */
+section, .card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   TESTEMUNHOS — MODERNO E PROFISSIONAL
+========================================================= */
+
+#testimonials {
+    background: linear-gradient(135deg, #e9f8ff 0%, #cde8f5 100%);
+    padding: 80px 20px;
+}
+
+/* Título */
+#testimonials .section-title {
+    font-size: 2.4rem;
+    color: #1d3557;
+    text-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+/* Subtítulo */
+#testimonials .section-subtitle {
+    color: #1d3557;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-top: 5px;
+}
+
+/* Cards */
+.testimonial-card {
+    background: #ffffff;
+    border-radius: 15px;
+    border: 1px solid #dce7ef;
+    padding: 30px 20px;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+/* Hover elegante */
+.testimonial-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* Ícone circular */
+.profile-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #1d3557;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px auto;
+}
+
+.profile-circle i {
+    font-size: 2rem;
+    color: #a8dadc;
+}
+
+/* Texto */
+.testimonial-text {
+    font-size: 1.1rem;
+    color: #1d3557;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+/* Autor */
+.testimonial-author {
+    font-weight: bold;
+    color: #457b9d;
+    margin-top: 10px;
+}
+
+
+
+/* =========================================================
+   CALL TO ACTION — VISUAL PROFISSIONAL
+========================================================= */
+
+#cta {
+    background: linear-gradient(135deg, #1d3557 0%, #274c7e 100%);
+    padding: 80px 20px;
+}
+
+/* Caixa central */
+.cta-box {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 50px 30px;
+    max-width: 650px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+}
+
+/* Título */
+.cta-box h2 {
+    font-size: 2.4rem;
+    color: #1d3557;
+}
+
+/* Subtítulo */
+.cta-subtitle {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+/* Botão */
+.cta-button {
+    padding: 14px 32px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    border-radius: 30px;
+    box-shadow: 0 5px 14px rgba(0, 123, 255, 0.3);
+    transition: background-color .3s, box-shadow .3s, transform .2s;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+footer {
+    background-color: #1d3557;
+    color: white;
+    padding: 40px 20px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+footer a:hover {
+    color: #f1faee;
+}
+
+/* =========================================================
+   BOTÃO DO MODO ESCURO
+========================================================= */
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #1d3557;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 9999;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    background: #457b9d;
+}
+
+/* Modo escuro */
+.dark-mode {
+    background-color: #121212 !important;
+    color: #f1f1f1 !important;
+}
+
+.dark-mode .theme-toggle {
+    background: #f1f1f1;
+    color: #121212;
+}
+
+.dark-mode .theme-toggle:hover {
+    background: #a8dadc;
+}

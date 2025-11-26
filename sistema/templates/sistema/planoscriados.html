@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Planos Ativos | EDUCLINK</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/PlanosCriados.css' %}">
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- TOPO -->
+    <header class="topbar">
+      <div class="brand">
+        <a href="#">EDUCLINK</a>
+        <span class="subtitle">Planos Ativos</span>
+      </div>
+
+      <div class="controls">
+        <div class="search">
+          <input id="searchInput" type="search" placeholder="Buscar plano por título, categoria ou tag...">
+          <button id="clearSearch" title="Limpar busca"><i class="fas fa-times"></i></button>
+        </div>
+
+        <select id="filterStatus" aria-label="Filtrar por status">
+          <option value="all">Todos os status</option>
+          <option value="ativo">Ativo</option>
+          <option value="em_andamento">Em andamento</option>
+        </select>
+
+        <a class="btn primary" href="{% url 'novo_plano' %}">
+          <i class="fas fa-plus"></i> Novo Plano
+        </a>
+      </div>
+    </header>
+
+    <!-- SUMÁRIO -->
+    <main>
+      <section class="summary-row">
+        <div class="summary-card">
+          <span>Planos ativos</span>
+          <strong id="planosCount">{{ planos|length }}</strong>
+        </div>
+
+        <div class="summary-card">
+          <span>Última atualização</span>
+          <strong>{{ ultima_atualizacao|default:"-" }}</strong>
+        </div>
+
+        <div class="summary-card">
+          <span>Filtro</span>
+          <strong id="appliedFilter">Todos</strong>
+        </div>
+      </section>
+
+
+      <!-- LISTA -->
+      <section class="plans-list-wrap">
+        <ul id="plansList" class="plans-list">
+
+          {% for plano in planos %}
+<li class="plan-card"
+  data-title="{{ plano.titulo|lower }}"
+  data-status="{{ plano.status }}"
+>
+
+  <div class="plan-main">
+    <div class="plan-meta">
+      <h4 class="plan-title">{{ plano.titulo }}</h4>
+      <p class="plan-category">{{ plano.categoria }}</p>
+
+      <div class="plan-tags">
+        {% for tag in plano.tag_list %}
+          <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="plan-actions">
+      <span class="badge status-{{ plano.status }}">
+        {{ plano.get_status_display }}
+      </span>
+
+      <a href="{% url 'baixar_plano_pdf' plano.id %}" class="icon-btn" title="Baixar PDF">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+
+      <a href="{% url 'editar_plano' plano.id %}" class="icon-btn" title="Editar">
+        <i class="fas fa-edit"></i>
+      </a>
+    </div>
+  </div> <!-- FECHA APENAS plan-main -->
+
+
+  <!-- FOOTER DENTRO DO CARD -->
+  <div class="plan-footer">
+    <small>
+      Criado em {{ plano.criado_em|date:"d/m/Y" }} • 
+      Última alteração {{ plano.atualizado_em|date:"d/m/Y" }}
+    </small>
+  </div>
+
+</li>
+{% endfor %}
+
+        </ul>
+      </section>
+    </main>
+
+    <footer class="page-footer">© 2025 EDUCLINK • Desenvolvido por EDUCLINK</footer>
+  </div>
+
+  <script src="{% static 'js/PlanosCriado.js' %}"></script>
+
+</body>
+</html>

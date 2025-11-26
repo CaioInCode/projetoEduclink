@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Dados | EDUCLINK</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/dados.css' %}">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>EDUCLINK</h1>
+                <span>Registro de Dados</span>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">JS</div>
+                <span>Prof. João Silva</span>
+            </div>
+        </header>
+
+        <main>
+            <h1 class="page-title">Atualizar Registro de Dados</h1>
+            <p class="page-subtitle">Mantenha seus dados atualizados para obter recomendações precisas.</p>
+
+            <div class="content-grid">
+                <!-- Coluna da Esquerda -->
+                <div>
+                    <!-- Card Nova Turma -->
+                    <div class="card new-class-card">
+                        <div class="new-class-title">Nova Turma?</div>
+                        <p class="new-class-description">Adicione uma nova turma para começar o acompanhamento pedagógico.</p>
+                        <button class="btn btn-secondary" id="addClassBtn">
+                            <i class="fas fa-plus"></i> Adicionar Turma
+                        </button>
+                    </div>
+
+                    <!-- Card Indicadores -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Indicadores da Turma</h2>
+                            <div class="card-actions">
+                                <button class="icon-btn" title="Atualizar"><i class="fas fa-sync-alt"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="indicators-grid" id="indicatorsGrid">
+                            <!-- Indicadores serão carregados via JavaScript -->
+                        </div>
+
+                        <div class="progress-container">
+                            <div class="progress-header">
+                                <span class="progress-title">Completude dos Dados</span>
+                                <span class="progress-value" id="progressValue">65%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Turmas Ativas -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Turmas Ativas</h2>
+                            <div class="card-actions">
+                                <button class="icon-btn" title="Filtrar"><i class="fas fa-filter"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="classes-list" id="classesList">
+                            <!-- Turmas serão carregadas via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna da Direita -->
+                <div>
+                    <!-- Card Upload de Dados -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Upload de Dados</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Selecionar Turma</label>
+                            <select class="form-select" id="classSelect">
+                                <option value="">Selecione uma turma</option>
+                                <!-- Opções serão preenchidas via JavaScript -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Tipo de Dados</label>
+                            <select class="form-select" id="dataTypeSelect">
+                                <option value="">Selecione o tipo de dados</option>
+                                <option value="avaliacoes">Resultados de Avaliações</option>
+                                <option value="frequencia">Registro de Frequência</option>
+                                <option value="comportamento">Observações de Comportamento</option>
+                                <option value="desempenho">Desempenho em Atividades</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Arquivo</label>
+                            <div style="border: 2px dashed #e6e9f2; border-radius: var(--radius); padding: 30px; text-align: center; cursor: pointer;" id="dropZone">
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 36px; color: var(--gray); margin-bottom: 10px;"></i>
+                                <p style="color: var(--gray); margin-bottom: 10px;">Arraste o arquivo aqui ou clique para selecionar</p>
+                                <p style="font-size: 12px; color: var(--gray);">Formatos suportados: CSV, XLSX, PDF</p>
+                                <input type="file" id="fileInput" style="display: none;">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-upload"></i> Fazer Upload
+                        </button>
+                    </div>
+
+                    <!-- Card Histórico de Atualizações -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Histórico de Atualizações</h2>
+                            <div class="card-actions">
+                                <button class="icon-btn" title="Ver todos"><i class="fas fa-expand"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="history-list" id="historyList">
+                            <!-- Histórico será carregado via JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Card Recomendações -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Recomendações</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <p style="font-size: 14px; color: var(--gray); margin-bottom: 15px;">
+                                Com base nos dados atualizados, recomendamos:
+                            </p>
+                            <ul style="font-size: 14px; color: var(--dark); padding-left: 20px;">
+                                <li style="margin-bottom: 8px;">Aplicar estratégias de reforço em Matemática</li>
+                                <li style="margin-bottom: 8px;">Implementar atividades em grupo para Português</li>
+                                <li style="margin-bottom: 8px;">Realizar avaliação diagnóstica para Ciências</li>
+                            </ul>
+                        </div>
+
+                        <button class="btn btn-outline" style="width: 100%;">
+                            <i class="fas fa-lightbulb"></i> Gerar Plano de Ação
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para Adicionar Turma -->
+    <div class="modal" id="addClassModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Adicionar Nova Turma</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            
+            <form id="classForm">
+                <div class="form-group">
+                    <label class="form-label">Nome da Turma</label>
+                    <input type="text" class="form-control" placeholder="Ex: 7º Ano A" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Ano/Série</label>
+                        <select class="form-select" required>
+                            <option value="">Selecione</option>
+                            <option value="6">6º Ano</option>
+                            <option value="7">7º Ano</option>
+                            <option value="8">8º Ano</option>
+                            <option value="9">9º Ano</option>
+                            <option value="1EM">1º Ano EM</option>
+                            <option value="2EM">2º Ano EM</option>
+                            <option value="3EM">3º Ano EM</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Turno</label>
+                        <select class="form-select" required>
+                            <option value="">Selecione</option>
+                            <option value="manha">Manhã</option>
+                            <option value="tarde">Tarde</option>
+                            <option value="noite">Noite</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Disciplinas</label>
+                    <select class="form-select" multiple style="height: 100px;">
+                        <option value="matematica">Matemática</option>
+                        <option value="portugues">Língua Portuguesa</option>
+                        <option value="ciencias">Ciências</option>
+                        <option value="historia">História</option>
+                        <option value="geografia">Geografia</option>
+                        <option value="ingles">Inglês</option>
+                        <option value="artes">Artes</option>
+                        <option value="educacao-fisica">Educação Física</option>
+                    </select>
+                    <small style="color: var(--gray); font-size: 12px;">Segure Ctrl para selecionar múltiplas disciplinas</small>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Número de Alunos</label>
+                    <input type="number" class="form-control" min="1" max="50" placeholder="Ex: 30" required>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Adicionar Turma</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script src="{% static 'js/dados.js' %}"></script>
+</body>
+</html>

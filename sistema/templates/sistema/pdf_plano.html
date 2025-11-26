@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+   <style>
+
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.subtitulo {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 17px;
+    font-weight: bold;
+    color: #314b7c;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+p, li {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Remove caixas */
+.box {
+    border: none !important;
+    background: none !important;
+    padding: 0 !important;
+    margin: 0 0 15px 0 !important;
+}
+
+/* Torna rótulos e seções negrito automaticamente */
+p strong, li strong {
+    font-weight: bold;
+}
+
+/* Conteúdo completo do plano gerado pela IA */
+.plano-formatado strong {
+    font-weight: bold;
+}
+
+/* Caso a IA gere títulos dentro do conteúdo */
+.plano-formatado h2,
+.plano-formatado h3 {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+    <h1>Plano de Ação Educacional</h1>
+    <p class="subtitulo">Gerado pela plataforma EDUCLINK com auxílio de IA</p>
+
+    <!-- INFORMAÇÕES PRINCIPAIS -->
+    <h2>Informações do Plano</h2>
+
+    <div class="box">
+        <p><strong>Título:</strong> {{ titulo }}</p>
+        <p><strong>Categoria:</strong> {{ categoria }}</p>
+        <p><strong>Descrição:</strong> {{ descricao }}</p>
+        <p><strong>Objetivos:</strong> {{ objetivos }}</p>
+        <p><strong>Estratégias:</strong> {{ estrategias }}</p>
+        <p><strong>Recursos:</strong> {{ recursos }}</p>
+        <p><strong>Avaliação:</strong> {{ avaliacao }}</p>
+    </div>
+
+    <!-- CONTEÚDO COMPLETO GERADO PELA IA -->
+    <h2>Conteúdo Completo do Plano</h2>
+
+    <div class="box plano-formatado">
+        {{ plano_gerado|safe }}
+    </div>
+
+</div>
+
+</body>
+</html>

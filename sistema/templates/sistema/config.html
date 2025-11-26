@@ -1,0 +1,186 @@
+{% load static %}
+
+{% block title %}Configurações de Perfil | EDUCLINK{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    <a href="{% url 'dashboard' %}" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Voltar ao Dashboard
+    </a>
+
+<link rel="stylesheet" href="{% static 'css/config.css' %}">
+
+    <header class="dashboard-header">
+        <h1 class="header-title">Configurações do Perfil</h1>
+        <p class="header-subtitle">Gerencie suas informações pessoais e preferências da conta.</p>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-sidebar">
+            <div class="profile-picture-section">
+
+    {% if profile.profile_picture %}
+        <img src="{{ profile.profile_picture.url }}" alt="Foto do perfil" class="profile-picture">
+    {% else %}
+        <img src="https://ui-avatars.com/api/?name={{ user.first_name }}+{{ user.last_name }}&background=4361ee&color=fff&size=150" 
+             alt="Foto do perfil" class="profile-picture">
+    {% endif %}
+
+    <h2 class="profile-name">{{ user.first_name }} {{ user.last_name }}</h2>
+    <p class="profile-role">Educador</p>
+
+    <!-- FORMULÁRIO SÓ DA FOTO -->
+    <form id="picture-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" id="profile_picture" name="profile_picture" accept="image/*" style="display: none;">
+        
+        <button type="button" class="btn-change-picture" id="btn-change-picture">
+            <i class="fas fa-camera"></i> Alterar Foto
+        </button>
+    </form>
+</div>
+
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Planos Ativos</span>
+                    <span class="stat-value">{{ stats.active_plans }}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Estratégias Salvas</span>
+                    <span class="stat-value">{{ stats.saved_strategies }}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Membro desde</span>
+                    <span class="stat-value">{{ stats.member_since|date:"M Y" }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <form method="post" enctype="multipart/form-data" id="profile-form">
+                {% csrf_token %}
+                
+                <h3 class="section-title">Informações Pessoais</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Nome</label>
+                        {{ user_form.first_name }}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Sobrenome</label>
+                        {{ user_form.last_name }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">E-mail</label>
+                    {{ user_form.email }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Telefone</label>
+                    {{ profile_form.phone }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Escola</label>
+                    {{ profile_form.school }}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Série/Ano</label>
+                        {{ profile_form.grade }}
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Disciplina Principal</label>
+                        {{ profile_form.subject }}
+                    </div>
+                </div>
+
+                <h3 class="section-title" style="margin-top: 30px;">Preferências</h3>
+
+                <div class="form-group">
+                    <label class="form-label">Idioma</label>
+                    {{ profile_form.language }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Fuso Horário</label>
+                    {{ profile_form.timezone }}
+                </div>
+
+                <div class="checkbox-group">
+                    {{ profile_form.email_notifications }}
+                    <label for="{{ profile_form.email_notifications.id_for_label }}" class="checkbox-label">
+                        Receber notificações por e-mail
+                    </label>
+                </div>
+
+                <div class="checkbox-group">
+                    {{ profile_form.push_notifications }}
+                    <label for="{{ profile_form.push_notifications.id_for_label }}" class="checkbox-label">
+                        Receber notificações no navegador
+                    </label>
+                </div>
+
+                <div class="checkbox-group">
+                    {{ profile_form.newsletter }}
+                    <label for="{{ profile_form.newsletter.id_for_label }}" class="checkbox-label">
+                        Receber newsletter com novidades educacionais
+                    </label>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" name="update_profile" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Salvar Alterações
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'dashboard' %}'">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+
+            <form method="post" id="password-form" style="margin-top: 40px;">
+                {% csrf_token %}
+                <h3 class="section-title">Alterar Senha</h3>
+
+                <div class="form-group">
+                    <label class="form-label">Senha Atual</label>
+                    {{ password_form.old_password }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nova Senha</label>
+                    {{ password_form.new_password1 }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Confirmar Nova Senha</label>
+                    {{ password_form.new_password2 }}
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" name="change_password" class="btn btn-primary">
+                        <i class="fas fa-key"></i> Alterar Senha
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+    // Quando clicar no botão → abre o input de arquivo
+    document.getElementById("btn-change-picture").addEventListener("click", function() {
+        document.getElementById("profile_picture").click();
+    });
+
+    // Quando selecionar o arquivo → envia o formulário
+    document.getElementById("profile_picture").addEventListener("change", function() {
+        document.getElementById("picture-form").submit();
+    });
+</script>

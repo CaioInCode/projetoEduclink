@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico Comparativo | EDUCLINK</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="{% static 'css/historico.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>EDUCLINK</h1>
+                <span>Histórico Comparativo</span>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">JS</div>
+                <span>Prof. João Silva</span>
+            </div>
+        </header>
+
+        <main>
+            <h1 class="page-title">Histórico Comparativo</h1>
+            <p class="page-subtitle">Analise a evolução do desempenho ao longo do tempo e compare períodos.</p>
+
+            <!-- Filtros -->
+            <div class="filters-container">
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label class="filter-label">Turma</label>
+                        <select class="filter-select" id="classSelect">
+                            <option value="all">Todas as Turmas</option>
+                            <option value="7a" selected>7º Ano A</option>
+                            <option value="8b">8º Ano B</option>
+                            <option value="9a">9º Ano A</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Disciplina</label>
+                        <select class="filter-select" id="subjectSelect">
+                            <option value="all">Todas as Disciplinas</option>
+                            <option value="math" selected>Matemática</option>
+                            <option value="portuguese">Língua Portuguesa</option>
+                            <option value="science">Ciências</option>
+                            <option value="history">História</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Indicador</label>
+                        <select class="filter-select" id="indicatorSelect">
+                            <option value="grades">Notas</option>
+                            <option value="frequency" selected>Frequência</option>
+                            <option value="participation">Participação</option>
+                            <option value="completion">Taxa de Entrega</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Período de Comparação</label>
+                        <select class="filter-select" id="periodSelect">
+                            <option value="bimonthly">Bimestral</option>
+                            <option value="quarterly" selected>Trimestral</option>
+                            <option value="semiannual">Semestral</option>
+                            <option value="annual">Anual</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button class="btn btn-outline" id="resetFilters">
+                        <i class="fas fa-redo"></i> Limpar Filtros
+                    </button>
+                    <button class="btn btn-primary" id="applyFilters">
+                        <i class="fas fa-chart-line"></i> Aplicar Análise
+                    </button>
+                </div>
+            </div>
+
+            <!-- Períodos de Comparação -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Períodos Comparados</h2>
+                </div>
+                <div class="period-cards">
+                    <div class="period-card active">
+                        <div class="period-title">Período Atual</div>
+                        <div class="period-date">3º Trimestre 2023</div>
+                        <div class="metric-value">7.8</div>
+                        <div class="metric-label">Média Geral</div>
+                    </div>
+                    <div class="period-card">
+                        <div class="period-title">Período Anterior</div>
+                        <div class="period-date">2º Trimestre 2023</div>
+                        <div class="metric-value">7.2</div>
+                        <div class="metric-label">Média Geral</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <!-- Coluna da Esquerda -->
+                <div>
+                    <!-- Gráfico de Evolução -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Evolução do Desempenho</h2>
+                            <div class="card-actions">
+                                <button class="icon-btn" title="Exportar"><i class="fas fa-download"></i></button>
+                                <button class="icon-btn" title="Configurações"><i class="fas fa-cog"></i></button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="evolutionChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Métricas Comparativas -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Indicadores Comparativos</h2>
+                        </div>
+                        <div class="metrics-grid" id="comparativeMetrics">
+                            <!-- Métricas serão carregadas via JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Tabela Comparativa -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Comparação por Disciplina</h2>
+                            <div class="card-actions">
+                                <button class="icon-btn" title="Expandir"><i class="fas fa-expand"></i></button>
+                            </div>
+                        </div>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Disciplina</th>
+                                    <th>Período Atual</th>
+                                    <th>Período Anterior</th>
+                                    <th>Variação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comparisonTableBody">
+                                <!-- Dados serão carregados via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Coluna da Direita -->
+                <div>
+                    <!-- Gráfico de Comparação -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Comparação de Períodos</h2>
+                            <div class="card-actions">
+                                <button class="icon-btn" title="Alternar vista"><i class="fas fa-exchange-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="comparisonChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Insights e Recomendações -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Insights da Análise</h2>
+                        </div>
+                        <div class="insights-list" id="insightsList">
+                            <!-- Insights serão carregados via JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Ações Recomendadas -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Ações Recomendadas</h2>
+                        </div>
+                        <div class="insights-list">
+                            <div class="insight-item success">
+                                <div class="insight-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <h4>Mantenha as Estratégias Atuais</h4>
+                                    <p>O crescimento em Matemática indica que as metodologias aplicadas estão funcionando.</p>
+                                </div>
+                            </div>
+                            <div class="insight-item warning">
+                                <div class="insight-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <h4>Reforço em Português</h4>
+                                    <p>A queda no desempenho sugere necessidade de intervenções específicas.</p>
+                                </div>
+                            </div>
+                            <div class="insight-item">
+                                <div class="insight-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="insight-content">
+                                    <h4>Otimizar Participação</h4>
+                                    <p>Implementar mais atividades em grupo pode melhorar o engajamento.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+<script src="{% static 'js/historico.js' %}"></script>
+</body>
+</html>

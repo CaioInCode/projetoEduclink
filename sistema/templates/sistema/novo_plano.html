@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <metacharset="UTF-8" />
+    <metaname="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novo Plano de Ação | EDUCLINK</title>
+    <!-- Font Awesome e Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Estilos locais -->
+    <link rel="stylesheet" href="{% static 'css/novo_plano.css' %}">
+</head>
+<body>
+    <main class="plano-container" role="main" aria-labelledby="planoTitle">
+        <header class="plano-header" role="banner">
+            <a href="{% url 'dashboard' %}" class="back-button" aria-label="Voltar ao dashboard">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                <span>Voltar ao Dashboard</span>
+            </a>
+
+            <h1 id="planoTitle" class="plano-title">Novo Plano de Ação</h1>
+            <p class="plano-subtitle">Crie um plano pedagógico personalizado com análise de IA</p>
+        </header>
+
+        <form class="plano-form" id="planoForm" method="post" action="{% url 'gerar_plano_ia' %}" novalidate>
+            {% csrf_token %}
+            
+            <!-- Informações Básicas -->
+            <section class="form-section" aria-labelledby="infoBasicasTitle">
+                <h2 id="infoBasicasTitle" class="section-title">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    Informações Básicas
+                </h2>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="titulo" class="form-label">Título do Plano</label>
+                        <input type="text" id="titulo" name="titulo" class="form-input" 
+                            placeholder="Ex: Plano de Intervenção em Leitura - 5º Ano" required>
+                        <div class="error-message" id="tituloError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria" class="form-label">Categoria</label>
+                        <select id="categoria" name="categoria" class="form-select" required>
+                            <option value="">Selecione uma categoria</option>
+                            <option value="matematica">Matemática</option>
+                            <option value="portugues">Língua Portuguesa</option>
+                            <option value="ciencias">Ciências</option>
+                            <option value="historia">História</option>
+                            <option value="geografia">Geografia</option>
+                            <option value="artes">Artes</option>
+                            <option value="educacao-fisica">Educação Física</option>
+                            <option value="multidisciplinar">Multidisciplinar</option>
+                        </select>
+                        <div class="error-message" id="categoriaError"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao" class="form-label">Descrição do Plano</label>
+                    <textarea id="descricao" name="descricao" class="form-textarea"
+                        placeholder="Descreva o contexto e propósito deste plano..." maxlength="500"></textarea>
+                    <div class="char-counter">
+                        <span id="descricaoCounter">0</span>/500 caracteres
+                    </div>
+                    <div class="error-message" id="descricaoError"></div>
+                </div>
+            </section>
+
+            <!-- Objetivos -->
+            <section class="form-section" aria-labelledby="objetivosTitle">
+                <h2 id="objetivosTitle" class="section-title">
+                    <i class="fas fa-bullseye" aria-hidden="true"></i>
+                    Objetivos de Aprendizagem
+                </h2>
+
+                <div class="form-group">
+                    <label for="objetivos" class="form-label">Quais são os objetivos principais deste plano?</label>
+                    <textarea id="objetivos" name="objetivos" class="form-textarea"
+                        placeholder="Descreva claramente o que os estudantes devem aprender ou alcançar..." required></textarea>
+                    <div class="form-hint">Descreva claramente o que os estudantes devem aprender ou alcançar</div>
+                    <div class="error-message" id="objetivosError"></div>
+                </div>
+            </section>
+
+            <!-- Estratégias -->
+            <section class="form-section" aria-labelledby="estrategiasTitle">
+                <h2 id="estrategiasTitle" class="section-title">
+                    <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+                    Estratégias Pedagógicas
+                </h2>
+
+                <div class="form-group">
+                    <label for="estrategias" class="form-label">Quais estratégias serão utilizadas?</label>
+                    <textarea id="estrategias" name="estrategias" class="form-textarea"
+                        placeholder="Descreva as metodologias, atividades e abordagens de ensino..." required></textarea>
+                    <div class="form-hint">Descreva as metodologias, atividades e abordagens de ensino</div>
+                    <div class="error-message" id="estrategiasError"></div>
+                </div>
+            </section>
+
+            <!-- Recursos -->
+            <section class="form-section" aria-labelledby="recursosTitle">
+                <h2 id="recursosTitle" class="section-title">
+                    <i class="fas fa-tools" aria-hidden="true"></i>
+                    Recursos Necessários
+                </h2>
+
+                <div class="form-group">
+                    <label for="recursos" class="form-label">Quais recursos serão necessários?</label>
+                    <textarea id="recursos" name="recursos" class="form-textarea"
+                        placeholder="Materiais, tecnologias, espaços ou outros recursos necessários..."></textarea>
+                    <div class="form-hint">Materiais, tecnologias, espaços ou outros recursos necessários</div>
+                    <div class="error-message" id="recursosError"></div>
+                </div>
+            </section>
+
+            <!-- Avaliação -->
+            <section class="form-section" aria-labelledby="avaliacaoTitle">
+                <h2 id="avaliacaoTitle" class="section-title">
+                    <i class="fas fa-clipboard-check" aria-hidden="true"></i>
+                    Avaliação
+                </h2>
+
+                <div class="form-group">
+                    <label for="avaliacao" class="form-label">Como a aprendizagem será avaliada?</label>
+                    <textarea id="avaliacao" name="avaliacao" class="form-textarea"
+                        placeholder="Descreva os instrumentos e critérios de avaliação..."></textarea>
+                    <div class="form-hint">Descreva os instrumentos e critérios de avaliação</div>
+                    <div class="error-message" id="avaliacaoError"></div>
+                </div>
+            </section>
+
+            <!-- Sugestões de IA -->
+            {% comment %} <section class="ai-suggestions" aria-labelledby="aiTitle">
+                <h3 id="aiTitle" class="ai-title">
+                    <i class="fas fa-robot" aria-hidden="true"></i>
+                    Sugestções de IA
+                </h3>
+                <div class="ai-options">
+                    <button type="button" class="ai-btn" id="sugerirEstrategias">
+                        <i class="fas fa-lightbulb"></i> <span>Sugerir Estratégias</span>
+                    </button>
+                    <button type="button" class="ai-btn" id="sugerirRecursos">
+                        <i class="fas fa-toolbox"></i> <span>Sugerir Recursos</span>
+                    </button>
+                    <button type="button" class="ai-btn" id="sugerirAvaliacao">
+                        <i class="fas fa-clipboard-list"></i> <span>Sugerir Avaliação</span>
+                    </button>
+                </div>
+                <div id="aiSuggestion" class="ai-suggestion-box" aria-live="polite"></div>
+            </section> {% endcomment %}
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="salvarRascunho">
+                    <i class="fas fa-save"></i>
+                    <span>Salvar como Rascunho</span>
+                </button>
+
+                <button type="submit" class="btn btn-primary">
+                     <i class="fas fa-check"></i>
+                <span>Criar Plano</span>
+                </button>
+
+            </div>
+        </form>
+    </main>
+
+    <!-- Overlay de carregamento -->
+    <div class="loading-overlay" id="loadingOverlay" role="status" aria-hidden="true">
+        <div class="loading-content">
+            <i class="fas fa-robot fa-spin"></i>
+            <p>Analisando com IA...</p>
+        </div>
+    </div>
+
+    <!-- Script local -->
+    <script src="{% static 'js/novo_plano.js' %}"></script>
+
+</body>
+</html>

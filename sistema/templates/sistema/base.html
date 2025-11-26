@@ -1,0 +1,342 @@
+{% load static %}
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Educlink{% endblock %}</title>
+    <link rel="icon" href="{% static 'image/logo.png' %}" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="{% static 'image/logo.png' %}">
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg shadow-sm navbar-edulink fixed-top">
+    <div class="container">
+
+        <!-- LOGO -->
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+        <img src="{% static 'image/logo.png' %}" alt="Educlink Logo"
+         class="me-2" style="height: 40px; width: auto;">
+        <span class="text-white fw-bold">Educlink</span>
+        </a>
+
+        <!-- Botão mobile -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Alternar navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#hero">Início</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Funcionalidades</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">Sobre</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#contatos">Contato</a>
+
+                </li>
+
+                <li class="nav-item ms-2">
+                    <button type="button" class="btn btn-login-edulink px-4 d-flex align-items-center gap-2"
+                    data-bs-toggle="modal" data-bs-target="#loginModal">
+                    
+                    Entrar
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    
+
+</nav>
+
+<div class="theme-toggle" id="themeToggle">
+    <i id="themeIcon" class="fas fa-moon"></i>
+</div>
+
+
+
+<section id="hero" class="hero d-flex align-items-center text-center text-white">
+    <div class="overlay"></div>
+    <div class="container position-relative">
+        <h1 class="fw-bold mb-3">Educlink</h1>
+        <p class="lead mb-4">
+            Transformando a educação de Jovens e Adultos e Idosos com planos de ação inteligentes e personalizados.
+        </p>
+        <a href="{% url 'register' %}" class="btn btn-light btn-lg text-primary">
+            Começar Agora
+        </a>
+    </div>
+</section>
+
+
+
+<!-- Funcionalidades Profissionais -->
+<section id="features" class="features-section py-5">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <h2 class="fw-bold section-title">Nossas Funcionalidades</h2>
+            <p class="section-subtitle">
+                Uma plataforma completa construída para facilitar o trabalho docente e elevar o desempenho dos alunos.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Card 1 -->
+            <div class="col-md-4">
+                <div class="feature-card p-4 h-100 text-center shadow-sm">
+                    <div class="icon-circle mb-3">
+                        <i class="bi bi-lightbulb-fill"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">Planos Inteligentes</h5>
+                    <p class="text-muted text-white-bottom">
+                        Geração automática de planos de ação baseados em dados reais, desempenho e necessidades individuais.</p>
+
+                    <button class="btn btn-outline-primary mt-3" data-bs-toggle="modal" data-bs-target="#saibaMaisModal">
+                        Saber mais
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-md-4">
+                <div class="feature-card p-4 h-100 text-center shadow-sm">
+                    <div class="icon-circle mb-3">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">Reutilização de Práticas</h5>
+                    <p class="text-muted">
+                        Crie uma biblioteca de planos, estratégias e materiais que podem ser reaplicados em novas turmas.
+                    </p>
+                    <button class="btn btn-outline-primary mt-3" data-bs-toggle="modal" data-bs-target="#saibaMaisModal">
+                        Saber mais
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-4">
+                <div class="feature-card p-4 h-100 text-center shadow-sm">
+                    <div class="icon-circle mb-3">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">Relatórios Avançados</h5>
+                    <p class="text-muted">
+                        Análises completas do progresso dos alunos, com indicadores de desempenho e alertas automáticos.
+                    </p>
+                    <button class="btn btn-outline-primary mt-3" data-bs-toggle="modal" data-bs-target="#saibaMaisModal">
+                        Saber mais
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Sobre -->
+<section id="about" class="py-5 text-center">
+    <div class="container">
+        <h2>Sobre o Educlink</h2>
+        <p>O Educlink é uma plataforma inovadora desenhada com um objetivo claro: facilitar a vida do professor da Educação de Jovens e Adultos (EJA) e potencializar sua capacidade de ensino. A plataforma reconhece que o maior desafio do docente do EJA é lidar com a enorme diversidade em sala de aula, onde cada aluno possui um nível, um ritmo e uma necessidade diferente.
+
+O núcleo do Educlink não é a gestão de alunos, mas sim a produção ágil de materiais didáticos personalizados.
+
+O Poder dos "Prompts Prontos"
+A grande força do Educlink está em sua interface de criação de conteúdo. A plataforma oferece ao docente um sistema baseado em "prompts prontos" — modelos de comando ou templates pedagógicos pré-estruturados.
+
+Isso elimina a dificuldade de "começar do zero" e permite que o professor crie, em minutos, recursos que levariam horas para serem elaborados manualmente.</p>
+    </div>
+</section>
+
+
+
+<!-- Testemunhos -->
+<section id="testimonials" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold section-title">O que nossos professores dizem</h2>
+            <p class="section-subtitle">Depoimentos reais de quem já utiliza o Educlink em sala de aula.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonial-card shadow-sm h-100">
+                    <div class="profile-circle">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <p class="testimonial-text">"O Educlink me ajudou a melhorar meus estudos e acompanhar meu progresso!"</p>
+                    <h6 class="testimonial-author">João S.</h6>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="testimonial-card shadow-sm h-100">
+                    <div class="profile-circle">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <p class="testimonial-text">"Ferramenta incrível para professores e alunos de EJAI."</p>
+                    <h6 class="testimonial-author">Maria A.</h6>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="testimonial-card shadow-sm h-100">
+                    <div class="profile-circle">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <p class="testimonial-text">"Acompanhamento detalhado que realmente faz diferença."</p>
+                    <h6 class="testimonial-author">Carlos P.</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Call to Action -->
+<!-- Call to Action Moderno -->
+<section id="cta" class="py-5">
+    <div class="container">
+        <div class="cta-box mx-auto text-center">
+            <h2 class="fw-bold mb-3">Pronto para começar?</h2>
+            <p class="cta-subtitle">
+                Crie sua conta e transforme a educação dos seus alunos hoje mesmo.
+            </p>
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg cta-button">
+                Criar Conta
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- Modal Saiba Mais -->
+<div class="modal fade" id="saibaMaisModal" tabindex="-1" aria-labelledby="saibaMaisModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color:  #1d3557; color:white;">
+        <h5 class="modal-title" id="saibaMaisModalLabel">✨ Transforme sua rotina com Planos Inteligentes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-footer">
+       <p> Nossa IA analisa o perfil da turma ou do aluno para gerar planos de aula completos, personalizados e alinhados aos objetivos pedagógicos.
+Você só precisa informar o tema ou habilidade desejada — o sistema cria atividades, estratégias didáticas, sugestões de avaliação e até adaptações para necessidades individuais.
+Com os Planos Inteligentes, você ganha tempo, reduz a carga de planejamento e garante aulas mais eficientes e contextualizadas.</p>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <a href="{% url 'register' %}" class="btn btn-primary">Criar Conta</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Login -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 15px;">
+            
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="loginModalLabel">Entrar na sua conta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- Formulário de Login -->
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label class="form-label">E-mail</label>
+                        <input type="email" name="email" class="form-control" placeholder="seuemail@exemplo.com" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Senha</label>
+                        <input type="password" name="password" class="form-control" placeholder="Digite sua senha" required>
+                    </div>
+
+                    <div class="d-flex justify-content-end mb-3">
+                        <a href="#" class="text-decoration-none">Esqueci minha senha</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 mb-3">
+                        Entrar
+                    </button>
+                </form>
+
+                <!-- Linha divisória -->
+                <div class="d-flex align-items-center my-3">
+                    <hr class="flex-grow-1">
+                    <span class="mx-2 text-muted">ou</span>
+                    <hr class="flex-grow-1">
+                </div>
+
+                <!-- Botão Google -->
+                <a href="{% provider_login_url 'google' %}"
+                    class="btn btn-outline-dark w-100 d-flex align-items-center justify-content-center gap-2"
+                    style="border-radius: 8px;">
+    
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                    alt="Google" width="20" height="20">Entrar com Google</a>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Footer -->
+<footer id="contatos" class="py-4" style="background-color: #1d3557; color: white;">
+    <div class="container text-center">
+        <p>&copy; 2025 Educlink. Todos os direitos reservados.</p>
+        <div>
+            
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"       class="text-white me-3">
+                <i class="fab fa-instagram fa-lg">Instagram</i>
+            </a>
+
+            <a href="#" class="text-white me-3">educlink.oficial@gmail.com</a>
+           
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JS personalizado -->
+<script src="{% static 'js/home.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

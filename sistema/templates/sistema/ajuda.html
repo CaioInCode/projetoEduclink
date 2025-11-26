@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Ajuda | EDUCLINK</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/ajuda.css' %}">
+
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <h1>EDUCLINK</h1>
+                <span>Central de Ajuda</span>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar">JS</div>
+                <span>Prof. João Silva</span>
+            </div>
+        </header>
+
+        <!-- Status do Sistema -->
+        <div class="status-banner">
+            <div class="status-indicator"></div>
+            <div class="status-text">
+                <strong>Todos os sistemas estão operando normalmente</strong>
+                <p>Última verificação: Hoje, 14:30</p>
+            </div>
+            <button class="btn btn-outline" onclick="showSystemDetails()">
+                <i class="fas fa-info-circle"></i> Detalhes
+            </button>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <main>
+            <h1 class="page-title">Como podemos ajudar?</h1>
+            <p class="page-subtitle">Encontre respostas rápidas para suas dúvidas ou entre em contato com nosso suporte.</p>
+
+            <!-- Barra de Pesquisa -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="helpSearch" placeholder="Digite sua dúvida...">
+                    <button onclick="searchHelp()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Seções de Ajuda -->
+            <div class="help-sections">
+                <div class="section-card">
+                    <div class="section-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Guias Rápidos</h3>
+                    <p>Instruções passo a passo para as funcionalidades principais da plataforma.</p>
+                    <button class="btn btn-primary" onclick="showGuides()">
+                        <i class="fas fa-book-open"></i> Ver Guias
+                    </button>
+                </div>
+                
+                <div class="section-card">
+                    <div class="section-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Perguntas Frequentes</h3>
+                    <p>Respostas para as dúvidas mais comuns dos usuários.</p>
+                    <button class="btn btn-primary" onclick="scrollToFAQ()">
+                        <i class="fas fa-list"></i> Ver FAQ
+                    </button>
+                </div>
+                
+                <div class="section-card">
+                    <div class="section-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Suporte Técnico</h3>
+                    <p>Entre em contato com nossa equipe para assistência personalizada.</p>
+                    <button class="btn btn-primary" onclick="showContactOptions()">
+                        <i class="fas fa-envelope"></i> Contatar Suporte
+                    </button>
+                </div>
+            </div>
+
+            <!-- FAQ Simplificado -->
+            <div class="faq-container" id="faqSection">
+                <div class="faq-header">
+                    <h2>Perguntas Frequentes</h2>
+                    <p>Encontre respostas rápidas para as dúvidas mais comuns</p>
+                </div>
+                <div class="faq-list" id="faqList">
+                    <!-- FAQ será carregado via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Contato Rápido -->
+            <div class="contact-container">
+                <h2>Precisa de mais ajuda?</h2>
+                <p>Nossa equipe de suporte está pronta para atendê-lo</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <h4>E-mail</h4>
+                        <p>suporte@educlink.com.br</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <h4>Telefone</h4>
+                        <p>(11) 3456-7890</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <h4>WhatsApp</h4>
+                        <p>(11) 98765-4321</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <h4>Horário</h4>
+                        <p>Seg-Sex: 8h-18h</p>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="openContactForm()">
+                    <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                </button>
+            </div>
+        </main>
+    </div>
+    <script src="{% static 'js/ajuda.js' %}"></script>
+
+</body>
+</html>

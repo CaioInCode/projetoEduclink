@@ -1,0 +1,117 @@
+/* ===== Fundo com imagem em tela cheia ===== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url("../image/educ.png") no-repeat center center;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== Container geral ===== */
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+/* ===== Card de cadastro ===== */
+.card {
+    border: none;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease-in-out;
+    width: 100%;
+    padding: 30px;
+    padding-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+    height: 70vh;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* ===== Título ===== */
+.card h2 {
+    font-weight: 600;
+    color: #1d3557;
+    margin-bottom: 10px;
+}
+
+/* ===== Inputs ===== */
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    padding: 10px;
+    margin: 1.5vh;
+    margin-left: 0px;
+}
+
+.form-control:focus {
+    border-color: #457b9d;
+    box-shadow: 0 0 5px rgba(69, 123, 157, 0.5);
+    outline: none;
+}
+
+/* ===== Botão principal ===== */
+.btn-primary {
+    background: #1d3557;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 500;
+    width: 100%;
+    transition: background 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background: #457b9d;
+}
+
+/* ===== Link "Já tenho uma conta" ===== */
+.btn-link {
+    text-decoration: none;
+    color: #1d3557;
+    font-weight: 500;
+    margin-top: 10px;
+    transition: color 0.2s ease-in-out;
+}
+
+.btn-link:hover {
+    color: #457b9d;
+}
+
+/* ===== Alertas ===== */
+.alert {
+    border-radius: 10px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 576px) {
+    .card {
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .card h2 {
+        font-size: 1.5rem;
+    }
+}

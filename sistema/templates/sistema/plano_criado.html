@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano Criado | EDUCLINK</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/plano_criado.css' %}">
+</head>
+<body>
+
+    <div class="success-container">
+        <div class="success-card">
+
+            <i class="fas fa-check-circle success-icon"></i>
+
+            <h1>Plano de Ação Criado com Sucesso!</h1>
+            <p>Seu plano pedagógico foi registrado e está pronto para análise e acompanhamento.</p>
+
+            <div class="success-actions">
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
+                </a>
+                <a href="{% url 'novo_plano' %}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Criar Novo Plano
+                </a>
+            </div>
+
+            <!-- RESUMO DO PLANO -->
+            <div class="plan-summary">
+                <h2>Resumo do Plano</h2>
+
+                <p><strong>Título:</strong> <span>{{ titulo|default:"—" }}</span></p>
+                <p><strong>Categoria:</strong> <span>{{ categoria|default:"—" }}</span></p>
+                <p><strong>Objetivos:</strong> <span>{{ objetivos|default:"—" }}</span></p>
+            </div>
+
+            <!-- TEXTO GERADO PELA IA -->
+            <div class="plan-content">
+                <h2>Plano Completo Gerado pela IA</h2>
+
+                <div class="plano-gerado">
+                    {{ plano_gerado|linebreaks }}
+                </div>
+            </div>
+
+            <div class="success-actions">
+            <a href="{% url 'gerar_pdf_plano' %}" class="btn btn-success">
+    <i class="fas fa-file-pdf"></i> Baixar PDF do Plano
+</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

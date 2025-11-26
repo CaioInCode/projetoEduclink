@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidades e Favoritos | EDUCLINK</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/favoritos.css' %}">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>EDUCLINK</h1>
+                <span>Comunidades e Favoritos</span>
+            </div>
+            <div class="user-actions">
+                <button class="btn btn-outline">
+                    <i class="fas fa-search"></i> Explorar Estratégias
+                </button>
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Nova Estratégia
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <h1 class="page-title">Comunidades e Favoritos</h1>
+            <p class="page-subtitle">Estratégias que você salvou para aplicar.</p>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar estratégias por nome, categoria ou autor...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="filter-tabs">
+                <div class="filter-tab active">Todas</div>
+                <div class="filter-tab">Minhas Favoritas</div>
+                <div class="filter-tab">Comunidade</div>
+                <div class="filter-tab">Mais Populares</div>
+            </div>
+
+            <div class="content-grid">
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Minhas Estratégias Favoritas</h2>
+                        <div class="section-actions">
+                            <button class="icon-btn" title="Ordenar"><i class="fas fa-sort"></i></button>
+                            <button class="icon-btn" title="Filtrar"><i class="fas fa-filter"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="strategies-grid" id="favoritesGrid">
+                        <!-- Estratégias favoritas serão carregadas aqui via JavaScript -->
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h2 class="section-title">Estratégias da Comunidade</h2>
+                        <div class="section-actions">
+                            <button class="icon-btn" title="Ordenar"><i class="fas fa-sort"></i></button>
+                            <button class="icon-btn" title="Filtrar"><i class="fas fa-filter"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="strategies-grid" id="communityGrid">
+                        <!-- Estratégias da comunidade serão carregadas aqui via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+<script src="{% static 'js/favoritos.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard | EDUCLINK: Análise à Ação{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/tela.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <header class="dashboard-header">
+            <h1 class="header-title">Bem-vindo(a) de volta, {{ user.first_name|default:user.username }}!</h1>
+            <p class="header-subtitle">Seu centro de apoio pedagógico e análise de desempenho.</p>
+        </header>
+
+        <section class="overview-cards-grid">
+            <a href="{% url 'criar_plano' %}" class="action-card card-primary">
+                <i class="icon fas fa-plus-circle"></i>
+                <span class="card-label">Novo Plano de Ação</span>
+                <h2 class="card-value">Iniciar Análise IA</h2>
+                <p class="card-detail">Comece a transformar seus dados em ações pedagógicas.</p>
+                <div class="progress-indicator">
+                    <div class="progress-bar" style="width: 0%"></div>
+                </div>
+                <span class="stats-badge">Recomendado</span>
+            </a>
+
+            <a href="{% url 'meus_planos' %}" class="data-card card-secondary">
+                <i class="icon fas fa-chalkboard-teacher"></i>
+                <span class="card-label">Meus Planos Ativos</span>
+                <h2 class="card-value">{{ planos_count }}</h2>
+                <p class="card-detail">Total de planos criados por você.</p>
+                <div class="progress-indicator">
+                    <div class="progress-bar" style="width: {{ progresso_planos }}%"></div>
+                </div>
+                <span class="stats-badge">+{{ planos_semana }} esta semana</span>
+            </a>
+
+            <a href="{% url 'planos_favoritos' %}" class="data-card card-tertiary">
+                <i class="icon fas fa-star"></i>
+                <span class="card-label">Comunidade e Favoritos</span>
+                <h2 class="card-value">{{ favoritos_count }}</h2>
+                <p class="card-detail">Estratégias que você salvou para aplicar.</p>
+                <div class="progress-indicator">
+                    <div class="progress-bar" style="width: {{ progresso_favoritos }}%"></div>
+                </div>
+                <span class="stats-badge">Popular</span>
+            </a>
+
+            <a href="{% url 'registro_turmas' %}" class="data-card card-quaternary">
+                <i class="icon fas fa-chart-line"></i>
+                <span class="card-label">Registro de Dados</span>
+                <h2 class="card-value">Nova Turma?</h2>
+                <p class="card-detail">Atualize os indicadores para gerar recomendações.</p>
+                <div class="progress-indicator">
+                    <div class="progress-bar" style="width: {{ progresso_turmas }}%"></div>
+                </div>
+                <span class="stats-badge">Atualizar</span>
+            </a>
+        </section>
+        
+        <div class="dashboard-content-row">
+            <section class="recent-plans-section">
+                <h3 class="section-title">Meus Planos Mais Recentes (Acompanhamento)</h3>
+                {% if planos_recentes %}
+                    <ul class="plan-list">
+                        {% for plano in planos_recentes %}
+                            <li class="plan-item">
+                                <a href="{% url 'detalhe_plano' plano.id %}">
+                                    <strong>{{ plano.titulo }}</strong> - Categoria: {{ plano.categoria.nome }}
+                                    <span class="status-tag status-{{ plano.status|lower }}">
+                                        {{ plano.get_status_display }}
+                                    </span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="no-data-message">Você ainda não criou nenhum Plano de Ação. Use o card acima para começar!</p>
+                {% endif %}
+            </section>
+
+            <section class="quick-actions-section">
+                <h3 class="section-title">Ações Rápidas</h3>
+                <ul class="quick-action-list">
+                    <li><a href="{% url 'historico_comparativo' %}" class="btn-quick-action"><i class="fas fa-history"></i> Histórico Comparativo</a></li>
+                    <li><a href="{% url 'ajuda' %}" class="btn-quick-action"><i class="fas fa-question-circle"></i> Central de Ajuda</a></li>
+                    <li><a href="{% url 'perfil' %}" class="btn-quick-action"><i class="fas fa-user-circle"></i> Configurações do Perfil</a></li>
+                    <li><a href="{% url 'logout' %}" class="btn-quick-action btn-logout-footer"><i class="fas fa-sign-out-alt"></i> Sair do Sistema</a></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    {% if messages %}
+        <div class="floating-notification show">
+            <i class="notification-icon fas fa-check-circle"></i>
+            {% for message in messages %}
+                <span>{{ message }}</span>
+            {% endfor %}
+            <button class="notification-close"><i class="fas fa-times"></i></button>
+        </div>
+    {% endif %}
+
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <script src="{% static 'js/tela.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

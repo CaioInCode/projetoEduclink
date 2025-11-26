@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard | EDUCLINK{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+
+    <!-- Cabeçalho -->
+    <header class="dashboard-header">
+        <h1 class="header-title">Bem-vindo(a) de volta, {{ user.first_name|default:user.username }}!</h1>
+        <p class="header-subtitle">Seu centro de apoio pedagógico e análise de desempenho.</p>
+    </header>
+
+    <!-- GRID COM 2 CARDS -->
+    <section class="overview-cards-grid">
+
+        <!-- CARD 1 - NOVO PLANO -->
+        <a href="{% url 'novo_plano' %}" class="action-card card-primary">
+            <i class="icon fas fa-plus-circle"></i>
+            <span class="card-label">Novo Plano de Ação</span>
+            <h2 class="card-value">Criar novo plano </h2>
+            <p class="card-detail">Comece a transformar seus dados em ações pedagógicas.</p>
+            <div class="progress-indicator">
+                <div class="progress-bar" style="width: 0%"></div>
+            </div>
+            <span class="stats-badge">Recomendado</span>
+        </a>
+
+        <!-- CARD 2 - PLANOS ATIVOS -->
+        <a href="{% url 'planoscriados' %}" class="action-card card-secondary">
+            <i class="icon fas fa-chalkboard-teacher"></i>
+            <span class="card-label">Meus Planos Ativos</span>
+            <h2 class="card-value">{{ planos_count }}</h2>
+            <p class="card-detail">Total de planos criados por você.</p>
+            <div class="progress-indicator">
+                <div class="progress-bar" style="width: {{ progresso_planos }}%"></div>
+            </div>
+            <span class="stats-badge">+{{ planos_semana }} esta semana</span>
+        </a>
+
+    </section>
+
+    <!-- PLANOS RECENTES -->
+    <section class="recent-plans-section">
+        <h3 class="section-title">Meus Planos Mais Recentes</h3>
+        {% if planos_recentes %}
+            <ul class="plan-list">
+                {% for plano in planos_recentes %}
+                    <li class="plan-item">
+                        <a href="">
+                            <strong>{{ plano.titulo }}</strong> - Categoria: {{ plano.categoria.nome }}
+                            <span class="status-tag status-{{ plano.status|lower }}">{{ plano.get_status_display }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-data-message">Você ainda não criou nenhum Plano de Ação. Use o card acima para começar!</p>
+        {% endif %}
+    </section>
+
+    <!-- AÇÕES RÁPIDAS -->
+    <section class="quick-actions-section">
+        <h3 class="section-title">Ações Rápidas</h3>
+        <ul class="quick-action-list">
+            <li><a href="{% url 'ajuda' %}" class="btn-quick-action"><i class="fas fa-question-circle"></i> Central de Ajuda</a></li>
+            <li><a href="{% url 'config' %}" class="btn-quick-action"><i class="fas fa-user-circle"></i> Configurações do Perfil</a></li>
+            <li><a href="{}" class="btn-quick-action btn-logout-footer">
+        <i class="fas fa-sign-out-alt"></i> Sair do Sistema</a></li>
+        </ul>
+    </section>
+
+</div>
+
+<!-- Notificações -->
+{% if messages %}
+<div class="floating-notification show">
+    <i class="notification-icon fas fa-check-circle"></i>
+    {% for message in messages %}
+        <span>{{ message }}</span>
+    {% endfor %}
+    <button class="notification-close"><i class="fas fa-times"></i></button>
+</div>
+{% endif %}
+
+<!-- Botão de tema -->
+<div class="theme-toggle">
+    <i class="fas fa-moon"></i>
+</div>
+
+<script src="{% static 'js/tela.js' %}"></script>
+</body>
+</html>
