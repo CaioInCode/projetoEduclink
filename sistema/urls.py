@@ -3,10 +3,8 @@ from . import views
 
 urlpatterns = [
 
-    # ---------------------------
-    # Páginas principais
-    # ---------------------------
-    path('', views.dashboard, name='dashboard'),
+    
+    path('', views.home, name='home'),  # URL raiz
     path('login/', views.login_view, name='login'),
     path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
@@ -38,8 +36,6 @@ urlpatterns = [
     # ---------------------------
     # CRUD dos planos
     # ---------------------------
-    path('plano/<int:plano_id>/editar/', views.editar_plano, name='editar_plano'),
-    path('plano/<int:plano_id>/excluir/', views.excluir_plano, name='excluir_plano'),
     path('plano/<int:plano_id>/pdf/', views.baixar_plano_pdf, name='baixar_plano_pdf'),
 
     

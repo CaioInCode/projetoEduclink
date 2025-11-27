@@ -286,31 +286,5 @@ def config(request):
 #                CRUD DOS PLANOS
 # ===============================================================
 
-def ver_plano(request, plano_id):
-    plano = get_object_or_404(Plano, id=plano_id)
-    return render(request, "planos/ver.html", {"plano": plano})
-
-def editar_plano(request, plano_id):
-    plano = get_object_or_404(Plano, id=plano_id)
-
-    if request.method == "POST":
-        plano.titulo = request.POST.get("titulo")
-        plano.categoria = request.POST.get("categoria")
-        plano.descricao = request.POST.get("descricao")
-        plano.objetivos = request.POST.get("objetivos")
-        plano.estrategias = request.POST.get("estrategias")
-        plano.recursos = request.POST.get("recursos")
-        plano.avaliacao = request.POST.get("avaliacao")
-        plano.save()
-
-        return redirect("ver_plano", plano_id=plano.id)
-
-    return render(request, "planos/editar.html", {"plano": plano})
-
-def excluir_plano(request, plano_id):
-    plano = get_object_or_404(Plano, id=plano_id)
-    plano.delete()
-    return redirect("planoscriados")
-
 def baixar_plano_pdf(request, plano_id):
     return gerar_pdf_plano(request)

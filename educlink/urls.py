@@ -16,12 +16,6 @@ urlpatterns = [
     # CRIAR PLANO
     path("novo/", views.novo_plano, name="novo"),
 
-    # VISUALIZAR PLANO ESPECÍFICO
-    path("<int:plano_id>/", views.ver_plano, name="ver"),
-
-    # EDITAR PLANO
-    path("<int:plano_id>/editar/", views.editar_plano, name="editar"),
-
     # GERAR PDF DO PLANO
     path("<int:plano_id>/pdf/", views.gerar_pdf_plano, name="pdf"),
 ]

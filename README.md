@@ -1,0 +1,3 @@
+# projetoEduclink
+django
+gunicorn
