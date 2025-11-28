@@ -44,6 +44,10 @@ def login_view(request):
             messages.error(request, error)
     return render(request, 'sistema/login.html', {'error': error})
 
+def logout_view(request):
+    logout(request)
+    return redirect("home")
+
 def register(request):
     if request.method == 'POST':
         username = request.POST.get('username')

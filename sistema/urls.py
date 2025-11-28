@@ -7,7 +7,7 @@ urlpatterns = [
     path('', views.home, name='home'),  # URL raiz
     path('login/', views.login_view, name='login'),
     path('register/', views.register, name='register'),
-    path('logout/', views.logout, name='logout'),
+    path('logout/', views.logout_view, name='logout'),
 
     # ---------------------------
     # Menu do sistema
@@ -20,7 +20,7 @@ urlpatterns = [
     path('historico/', views.historico, name='historico'),
     path('ajuda/', views.ajuda, name='ajuda'),
     path('config/', views.config, name='config'),
-
+   
     # ---------------------------
     # Plano criado + PDF
     # ---------------------------
